@@ -1,0 +1,21 @@
+{% extends "diary/base.html" %}
+{% load humanize %}
+{% block content %}
+<h2>ALL DIARIES</h2>
+<a href="{% url 'creatediary' %}"><button class="btn btn-primary" type = "submit">Add a New Diary</button></a>
+<div>
+   {% for diary in diary_list %}
+   <div class="list-group">
+      <a href=" " class="list-group-item list-group-item-action flex-column align-items-start">
+         <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ diary.title }}</h5>
+            <small>{{ diary.date_added|naturaltime }}</small>
+         </div>
+         <p class="mb-1">{{ diary.description|truncatechars:120}}</p>
+         <a href="{% url 'updatediary' diary.id %}"><button class="btn btn-success btn-sm" type = "button">update</button></a>
+         <a href="{% url 'deletediary' diary.id %}"><button class="btn btn-danger btn-sm" type = "button">delete</button></a>
+      </a>
+   </div>
+   {% endfor %}
+{% endblock %}
+</div>
